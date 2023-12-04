@@ -3,19 +3,15 @@ let currentScore = JSON.parse(localStorage.getItem("currentScore")) || 0;
 let targetScore = JSON.parse(localStorage.getItem("targetScore")) || 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Load tasks, target score, and current score from local storage on page load
   tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   targetScore = JSON.parse(localStorage.getItem("targetScore")) || 0;
   currentScore = JSON.parse(localStorage.getItem("currentScore")) || 0;
 
-  // Update the task lists
   updateTaskLists();
 
-  // Display the current score
   const scoreElement = document.getElementById("score");
   scoreElement.textContent = currentScore;
 
-  // Display the target score message
   updateTargetScoreMessage();
 });
 
@@ -56,7 +52,7 @@ function updateTaskLists() {
   tasks.forEach((task) => {
     const taskItem = document.createElement("li");
 
-    // Create a div to hold task details
+    // div to hold task details
     const taskDetailsDiv = document.createElement("div");
     taskDetailsDiv.style = `display:flex; width:100%; justify-content: space-between;`;
     // Display task name
@@ -67,33 +63,33 @@ function updateTaskLists() {
     const btnDiv = document.createElement("div");
     taskDetailsDiv.appendChild(btnDiv);
 
-    // Add an "Edit Task" button only for incomplete tasks with a pencil icon
+    //"Edit Task" button
     if (!task.completed) {
       const editButton = document.createElement("button");
-      editButton.innerHTML = '<i class="fa-solid fa-pencil"></i>'; // Unicode for a pencil icon
-      editButton.style.background = "none"; // Remove background color
-      editButton.style.border = "none"; // Remove border
+      editButton.innerHTML = '<i class="fa-solid fa-pencil"></i>';
+      editButton.style.background = "none";
+      editButton.style.border = "none";
       editButton.style.cursor = "pointer";
       editButton.onclick = () => editTaskName(task);
       btnDiv.appendChild(editButton);
     }
 
-    // Add a "Mark as Completed" button next to each incomplete task with a green tick mark
+    //"Mark as Completed" button
     if (!task.completed) {
       const markButton = document.createElement("button");
-      markButton.innerHTML = '<i class="fa-regular fa-circle-check"></i>'; // Unicode for a green tick mark
-      markButton.style.background = "none"; // Remove background color
-      markButton.style.border = "none"; // Remove border
+      markButton.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+      markButton.style.background = "none";
+      markButton.style.border = "none";
       markButton.style.cursor = "pointer";
       markButton.onclick = () => completeTask(task);
       btnDiv.appendChild(markButton);
     }
 
-    // Add a "Delete Task" button next to each task with a red trashcan
+    //"Delete Task" button
     const deleteButton = document.createElement("button");
     deleteButton.innerHTML = '<i class="fa-solid fa-trash-xmark"></i>';
-    deleteButton.style.background = "none"; // Remove background color
-    deleteButton.style.border = "none"; // Remove border
+    deleteButton.style.background = "none";
+    deleteButton.style.border = "none";
     deleteButton.style.cursor = "pointer";
     deleteButton.onclick = () => deleteTask(task);
     btnDiv.appendChild(deleteButton);
@@ -117,7 +113,6 @@ function updateTaskLists() {
     }
   });
 
-  // Save tasks, current score, and target score to local storage after updating
   saveToLocalStorage();
 }
 
@@ -135,13 +130,10 @@ function completeTask(task) {
     const scoreElement = document.getElementById("score");
     scoreElement.textContent = currentScore;
 
-    // Update the task lists
     updateTaskLists();
 
-    // Update target score message
     updateTargetScoreMessage();
   }
-  // Update local storage when a task is completed
   saveToLocalStorage();
 }
 
@@ -149,7 +141,6 @@ function deleteTask(task) {
   tasks = tasks.filter((t) => t !== task);
   updateTaskLists();
 
-  // Update local storage when a task is deleted
   saveToLocalStorage();
 }
 
@@ -174,8 +165,6 @@ function updateScore(difficulty) {
       currentScore += 3;
       break;
   }
-
-  // Update local storage when the score is updated
   saveToLocalStorage();
 }
 
@@ -183,10 +172,8 @@ function setTargetScore() {
   const targetInput = document.getElementById("targetScore");
   targetScore = parseInt(targetInput.value);
 
-  // Update target score message
   updateTargetScoreMessage();
 
-  // Update local storage when target score is set
   saveToLocalStorage();
 }
 
@@ -204,22 +191,18 @@ function updateTargetScoreMessage() {
   }
 }
 
-// Add event listener for resetting points
+//event listener for resetting points
 document.getElementById("resetPoints").addEventListener("click", () => {
   resetPoints();
 });
 
-// Function to reset points
 function resetPoints() {
   currentScore = 0;
 
-  // Update the score display
   const scoreElement = document.getElementById("score");
   scoreElement.textContent = currentScore;
 
-  // Update target score message
   updateTargetScoreMessage();
 
-  // Update local storage when points are reset
   saveToLocalStorage();
 }
