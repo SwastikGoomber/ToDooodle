@@ -36,7 +36,7 @@ h1 {
 }
 
 #incompleteTasks h2 {
-    color: #ccc; /* Set the desired color */
+    color: #ccc;
 }
 
 
@@ -164,21 +164,17 @@ label {
     padding: 10px;
     border-radius: 8px;
     background-color: #e0f2f120;
-    margin-bottom: 20px; /* Add margin to create space between the box and other content */
+    margin-bottom: 20px;
     max-width: max-content;
     margin: auto;
 }
 
 h1 {
-    margin: 0; /* Remove default margin from h1 to prevent spacing inside the box */
+    margin: 0;
     color: white;
 }
 
-/* ... (rest of your styles) */
-
-
-
-/* Media Query for screens smaller than 600px (e.g., phones) */
+/* Media Query for screens smaller than 600px */
 @media (max-width: 600px) {
     .tasks-container {
         flex-direction: column;
